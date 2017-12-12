@@ -10,98 +10,28 @@ export default new Vuex.Store({
         items: []
     },
     mutations: {
-        FETCH_TODOS(state, todos) {
-            state.todos = todos;
+        FETCH_EVENTS(state, events) {
+            state.items = todos;
         },
-        GET_TODO(state, todo) {
-            state.newTodo = todo
+        FETCH_ITEMS(state, items) {
+            state.items = items;
         },
-        ADD_TODO(state, todo) {
-            state.todos.push(todo)
-        },
-        EDIT_TODO(state, todo) {
-            var todos = state.todos
-            todos.splice(todos.indexOf(todo), 1)
-            state.todos = todos
-            state.newTodo = todo.body
-        },
-        REMOVE_TODO(state, todo) {
-            var todos = state.todos
-            todos.splice(todos.indexOf(todo), 1)
-        },
-        COMPLETE_TODO(state, todo) {
-            todo.completed = !todo.completed
-        },
-        CLEAR_TODO(state) {
-            state.newTodo = ''
-        }
     },
 
     actions: {
-        fetchTodos({commit}, todo) {
+        fetchEvents({commit}, todo) {
             // async call here
-            fetch('/api/todos', {})
+            fetch('/api/events', {})
                   .then(response => response.json())
                   .then((json) => {
                     commit('FETCH_TODOS', json.data);
                   });
         },
-        getTodo({commit}, todo) {
-            commit('GET_TODO', todo)
-        },
-        addTodo({commit}, todo) {
-            fetch('/api/todos', {
-                  method: 'POST',
-                  headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({ todo: todo })
-                })
-                  .then(response => response.json())
-                  .then((json) => {
-                    commit('ADD_TODO', todo)
-                  });
-        },
-        editTodo({commit}, todo) {
-            fetch('/api/todos/' + todo.id, {
-                method: 'PUT',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ todo: { id: todo.id, _id: todo._id, body: todo.body, completed: todo.completed } } )
-            })
-            .then(response => response.json())
-            .then((json) => {
-               commit('EDIT_TODO', todo)
-            });
-        },
-        removeTodo({commit}, todo) {
-            commit('REMOVE_TODO', todo)
-        },
-        completeTodo({commit}, todo) {
-            fetch('/api/todos/' + todo.id, {
-                method: 'PUT',
-                headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                          },
-                body: JSON.stringify({ todo: { id: todo.id, body: todo.body, completed: !todo.completed } } )
-            })
-            .then(response => response.json())
-            .then((json) => {
-               commit('COMPLETE_TODO', todo)
-            });
-        },
-        clearTodo({commit}) {
-            commit('CLEAR_TODO')
-        }
+
     },
 
     getters: {
-        newTodo: state => state.newTodo,
-        todos: state => state.todos.filter((todo) => {return !todo.completed}),
-        completedTodos: state => state.todos.filter((todo) => {return todo.completed})
+        events: state => state.events,
+        items: state => state.items
     }
 })
