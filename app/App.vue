@@ -1,20 +1,18 @@
 <template>
   <div id="app" class="container">
-    <CompletedTodos></CompletedTodos>
-    <GetTodo></GetTodo>
-    <CurrentTodos></CurrentTodos>
+    <EventList></EventList>
+    <ItemList></ItemList>
   </div>
 </template>
 
 <script>
-import GetTodo from './components/GetTodo.vue'
-import CurrentTodos from './components/CurrentTodos.vue'
-import CompletedTodos from './components/CompletedTodos.vue'
+import EventList from './components/EventList.vue'
+import ItemList from './components/ItemList.vue'
+
 export default {
   components: {
-    GetTodo,
-    CurrentTodos,
-    CompletedTodos
+    EventList,
+    ItemList
   }
 
 }
