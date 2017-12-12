@@ -24,10 +24,17 @@ export default new Vuex.Store({
             fetch('/api/events', {})
                   .then(response => response.json())
                   .then((json) => {
-                    commit('FETCH_TODOS', json.data);
+                    commit('FETCH_EVENTS', json.data);
                   });
         },
-
+        fetchItems({commit}, todo) {
+            // async call here
+            fetch('/api/items', {})
+                  .then(response => response.json())
+                  .then((json) => {
+                    commit('FETCH_ITEMS', json.data);
+                  });
+        }
     },
 
     getters: {
