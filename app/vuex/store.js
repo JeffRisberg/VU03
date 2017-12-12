@@ -11,7 +11,7 @@ export default new Vuex.Store({
     },
     mutations: {
         FETCH_EVENTS(state, events) {
-            state.items = todos;
+            state.events = events;
         },
         FETCH_ITEMS(state, items) {
             state.items = items;
@@ -19,7 +19,7 @@ export default new Vuex.Store({
     },
 
     actions: {
-        fetchEvents({commit}, todo) {
+        fetchEvents({commit}) {
             // async call here
             fetch('/api/events', {})
                   .then(response => response.json())
@@ -27,7 +27,7 @@ export default new Vuex.Store({
                     commit('FETCH_EVENTS', json.data);
                   });
         },
-        fetchItems({commit}, todo) {
+        fetchItems({commit}) {
             // async call here
             fetch('/api/items', {})
                   .then(response => response.json())
