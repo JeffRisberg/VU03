@@ -1,28 +1,25 @@
 <template>
-    <div id="get-todo" class="container">
-        <input class="form-control"
-               :value="newTodo"
-               @change="getTodo"
-               placeholder="I need to...">
-        <button class="btn btn-primary" @click="addTodo">Add Todo</button>
+    <div id="event-list">
+        <ul class="list-group">
+            <li class="list-group-event" v-for="event in events">
+                {{todo.body}}
+                <button type="button" @click="remove(todo)" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-remove-circle"></span> Remove
+                </button>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
     export default{
-        methods: {
-            getTodo(e) {
-                this.$store.dispatch('getTodo', e.target.value)
-            },
-            addTodo() {
-                const body = this.$store.getters.newTodo
-                this.$store.dispatch('addTodo', {body: body, completed: false})
-                this.$store.dispatch('clearTodo')
-            }
+        mounted: function() {
+            console.log("ItemList Mounted");
+            this.$store.dispatch('fetchItemss');
         },
         computed: {
-            newTodo() {
-                return this.$store.getters.newTodo
+            events() {
+                return this.$store.getters.events
             }
         }
     }
