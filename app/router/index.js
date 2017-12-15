@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
-import About from '@/components/About'
-import Coins from '@/components/Coins.vue'
+import Hello from '../components/Hello'
+import EventList from '../components/EventList'
+import EventForm from '../components/EventForm'
+import ItemList from '../components/ItemList'
+import ItemForm from '../components/ItemForm'
 
 Vue.use(Router)
 
@@ -14,14 +16,24 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/about',
-      name: 'About',
-      component: About
+      path: '/events',
+      name: 'Events',
+      component: EventList
     },
     {
-      path: '/coins/:id',
-      name: 'Coins',
-      component: Coins
+      path: '/events/:id',
+      name: 'Event Edit',
+      component: EventForm
+    },
+    {
+      path: '/items',
+      name: 'Items',
+      component: ItemList
+    },
+    {
+      path: '/items/:id',
+      name: 'Item Edit',
+      component: ItemForm
     }
   ]
 })

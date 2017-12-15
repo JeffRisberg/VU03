@@ -2,7 +2,8 @@
     <div id="item-list">
         <ul class="list-group">
             <li class="list-group-item" v-for="item in items">
-                {{item.name}}
+                {{item.name}} {{item.description}} {{item.value}} {{item.lastUpdated}}
+                <a :href="'/items/' + item.id">Edit</a>
             </li>
         </ul>
     </div>
