@@ -1,11 +1,13 @@
 <template>
     <div id="event-list">
+        <router-link to="/events/new">Add New Event</router-link>
+
         <table class="list-group">
             <tr class="list-group-event" v-for="event in events">
                 <td>{{event.text}}</td>
                 <td>{{event.time}}</td>
                 <td>{{event.completed}}</td>
-                <td><a :href="'/events/' + event.id">Edit</a></td>
+                <td><router-link :to="'/events/' + event.id">Edit</router-link></td>
             </tr>
         </table>
     </div>
@@ -14,7 +16,6 @@
 <script>
   export default {
     mounted: function () {
-      console.log("EventList Mounted");
       this.$store.dispatch('fetchEvents');
     },
     computed: {

@@ -1,7 +1,9 @@
 <template>
   <div id="app" class="container">
-    <EventList></EventList>
-    <ItemList></ItemList>
+    <router-link :to="{ name: 'Hello' }">Home</router-link>
+    <router-link to="/events">Events</router-link>
+    <router-link to="/items">Items</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -14,7 +16,6 @@ export default {
     EventList,
     ItemList
   }
-
 }
 </script>
 

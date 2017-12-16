@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '../components/Hello'
-import EventList from '../components/EventList'
-import EventForm from '../components/EventForm'
-import ItemList from '../components/ItemList'
-import ItemForm from '../components/ItemForm'
+import Hello from '../components/Hello.vue'
+import EventList from '../components/EventList.vue'
+import EventForm from '../components/EventForm.vue'
+import ItemList from '../components/ItemList.vue'
+import ItemForm from '../components/ItemForm.vue'
 
 Vue.use(Router)
 
@@ -21,6 +21,11 @@ export default new Router({
       component: EventList
     },
     {
+      path: '/events/new',
+      name: 'New Event',
+      component: EventForm
+    },
+    {
       path: '/events/:id',
       name: 'Event Edit',
       component: EventForm
@@ -29,6 +34,11 @@ export default new Router({
       path: '/items',
       name: 'Items',
       component: ItemList
+    },
+    {
+      path: '/items/new',
+      name: 'New Item',
+      component: ItemForm
     },
     {
       path: '/items/:id',

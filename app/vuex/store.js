@@ -7,12 +7,18 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     events: [],
-    items: []
+    event: null,
+    items: [],
+    item: null
   },
   mutations: {
     FETCH_EVENTS(state, events) {
       state.events = events;
       // set the wait flag
+    },
+    SET_EVENT(state, event) {
+      state.event = event;
+      // clear the wait flag
     },
     FETCH_EVENTS_SUCCESS(state) {
       // clear the wait flag
@@ -21,6 +27,9 @@ export default new Vuex.Store({
       state.items = items;
       // set the wait flag
     },
+    SET_ITEM(state, item) {
+      state.item = item;
+    },
     FETCH_ITEMS_SUCCESS(state) {
       // clear the wait flag
     },
@@ -28,15 +37,24 @@ export default new Vuex.Store({
 
   actions: {
     fetchEvents({ commit }) {
-      // async call here
       fetch('/api/events', {})
         .then(response => response.json())
         .then((json) => {
           commit('FETCH_EVENTS', json.data);
         })
     },
+    fetchEvent({ commit }, id) {
+      fetch('/api/events/' + id, {})
+        .then(response => response.json())
+        .then((json) => {
+          commit('SET_EVENT', json.data);
+        })
+    },
+    newEvent({ commit }, id) {
+      commit('SET_EVENT', { text: "", text: 0, dateUpdated: null, completed: false});
+    },
     saveEvent({ commit }, event) {
-      fetch('/api/events', {
+      fetch('/api/events/' + id, {
         method: 'PUT',
         headers: {
           'Accept': 'application/json',
@@ -73,17 +91,27 @@ export default new Vuex.Store({
         body: JSON.stringify({ event: event })
       })
     },
+
     fetchItems({ commit }) {
-      // async call here
       fetch('/api/items', {})
         .then(response => response.json())
         .then((json) => {
           commit('FETCH_ITEMS', json.data);
         })
     },
+    fetchItem({ commit }, id) {
+      fetch('/api/items/' + id, {})
+        .then(response => response.json())
+        .then((json) => {
+          commit('SET_ITEM', json.data);
+        })
+    },
+    newItem({ commit }, id) {
+      commit('SET_ITEM', { name: "", value: 0, dateUpdated: null, completed: false});
+    },
     saveItem({ commit }, item) {
       // async call here
-      fetch('/api/items', {
+      fetch('/api/items/' + item.id, {
         method: 'PUT'
       })
         .then(response => response.json())
@@ -119,6 +147,8 @@ export default new Vuex.Store({
 
   getters: {
     events: state => state.events,
-    items: state => state.items
+    event: state => state.event,
+    items: state => state.items,
+    item: state => state.item
   }
 })
