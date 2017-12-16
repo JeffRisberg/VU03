@@ -54,7 +54,7 @@ export default new Vuex.Store({
       commit('SET_EVENT', { text: "", text: 0, dateUpdated: null, completed: false});
     },
     saveEvent({ commit }, event) {
-      fetch('/api/events/' + id, {
+      fetch('/api/events/' + event.id, {
         method: 'PUT',
         headers: {
           'Accept': 'application/json',
@@ -110,7 +110,6 @@ export default new Vuex.Store({
       commit('SET_ITEM', { name: "", value: 0, dateUpdated: null, completed: false});
     },
     saveItem({ commit }, item) {
-      // async call here
       fetch('/api/items/' + item.id, {
         method: 'PUT'
       })
