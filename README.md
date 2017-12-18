@@ -1,8 +1,6 @@
-# Learn Vuex by Building a Notes App
+# VU03
 
-This code is for the tutorial on building a Notes App using VueJs and Vuex
-
-Check out the full tutorial on [coligo](http://coligo.io/learn-vuex-by-building-notes-app/)
+Similar to RE03
 
 ### Install the dependencies
 
@@ -10,14 +8,14 @@ Check out the full tutorial on [coligo](http://coligo.io/learn-vuex-by-building-
 npm install
 ```
 
-### Run the dev server with hot reload at localhost:8080
+### Build the code
 
 ```bash
-npm run dev
+webpack --watch
 ```
 
-### Build the app for production
+### Run the server in a different window
 
 ```bash
-npm run build
+node server/index.js
 ```

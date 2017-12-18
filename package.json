@@ -1,11 +1,11 @@
 {
-  "name": "VU02",
+  "name": "VU03",
   "version": "1.0.0",
   "description": "A notes application built using VueJs and Vuex",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JeffRisberg/VU02"
+    "url": "https://github.com/JeffRisberg/VU03"
   },
   "scripts": {
     "start": "node server/index.js",
