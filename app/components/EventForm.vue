@@ -1,15 +1,15 @@
 <template>
-    <div id="event-form">
-        <form id="event">
-            <label>Text</label>
-            <input id="text" name="text" v-model='text' />
-            <br/>
-            <label>Time</label>
-            <input id="time" name="time" v-model='time' />
-            <br/>
-            <input type="submit" @click="submitEvent(text, time)" />
-        </form>
-    </div>
+  <div id="event-form">
+    <form id="event">
+      <label>Text</label>
+      <input id="text" name="text" v-model='text'/>
+      <br/>
+      <label>Time</label>
+      <input id="time" name="time" v-model='time'/>
+      <br/>
+      <input type="submit" @click="submitEvent(text, time)"/>
+    </form>
+  </div>
 </template>
 
 <script>

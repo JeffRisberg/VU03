@@ -1,7 +1,28 @@
 import Vue from 'vue'
-import store from './vuex/store'
+import VueRouter from 'vue-router'
+
+import { store } from './store/index.js'
+import { routes } from './routes'
+import Accounting from 'accounting-js'
 import App from './App.vue'
-import router from './router'
+
+Vue.use(VueRouter)
+
+const router = new VueRouter({
+  routes,
+  mode: 'history',
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      }
+    }
+  }
+})
+
+Vue.filter('currency', function(val){
+  return Accounting.formatMoney(val)
+})
 
 const myApp = new Vue({
   store,
