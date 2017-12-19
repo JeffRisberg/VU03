@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import EventList from './components/EventList.vue'
-import ItemList from './components/ItemList.vue'
+import EventList from './components/Events/EventList.vue'
+import ItemList from './components/Items/ItemList.vue'
 
 export default {
   components: {

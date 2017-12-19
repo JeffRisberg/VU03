@@ -9,7 +9,7 @@
     name: 'Hello',
     data() {
       return {
-        msg: 'Welcome to VU02'
+        msg: 'Welcome to VU03'
       }
     }
   }

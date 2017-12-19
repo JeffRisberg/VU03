@@ -14,7 +14,7 @@ module.exports = (app) => {
   const eventsDB = app.eventsDB;
 
   eventsRouter.get('/', function (req, res) {
-    delete req.query["_"];
+    delete req.query[ "_" ];
     eventsDB.find(req.query).exec(function (error, events) {
       setTimeout(
         () => res.send({
@@ -30,32 +30,34 @@ module.exports = (app) => {
     eventsDB.find({}).sort({ id: -1 }).limit(1).exec(function (err, events) {
 
       if (events.length != 0)
-        req.body.event.id = events[0].id + 1;
+        req.body.event.id = events[ 0 ].id + 1;
       else
         req.body.event.id = 1;
 
       // Insert the new record
       eventsDB.insert(req.body.event, function (err, newEvent) {
         res.status(201);
-        res.send({ 'status': 'ok', 'data': [newEvent] });
+        res.send({ 'status': 'ok', 'data': [ newEvent ] });
       })
     });
   });
 
   eventsRouter.get('/:id', function (req, res) {
     eventsDB.find({ id: req.params.id }).exec(function (error, events) {
-      if (events.length > 0)
-        res.send({
-          'status': 'ok',
-          'data': events[0]
-        });
-      else {
-        res.status(404);
-        res.send({
-          'status': 'missing',
-          'data': null
-        });
-      }
+      setTimeout(() => {
+        if (events.length > 0)
+          res.send({
+            'status': 'ok',
+            'data': events[ 0 ]
+          });
+        else {
+          res.status(404);
+          res.send({
+            'status': 'missing',
+            'data': null
+          });
+        }
+      }, 1000);
     });
   });
 
@@ -63,7 +65,7 @@ module.exports = (app) => {
     const event = req.body.event;
 
     eventsDB.update({ id: req.params.id }, event, {}, function () {
-      res.send({ 'status': 'ok', 'data': [event] });
+      res.send({ 'status': 'ok', 'data': [ event ] });
     });
   });
 

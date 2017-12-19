@@ -1,8 +1,8 @@
 import Hello from './components/Hello.vue'
-import EventList from './components/EventList.vue'
-import EventForm from './components/EventForm.vue'
-import ItemList from './components/ItemList.vue'
-import ItemForm from './components/ItemForm.vue'
+import EventList from './components/Events/EventList.vue'
+import EventForm from './components/Events/EventForm.vue'
+import ItemList from './components/Items/ItemList.vue'
+import ItemForm from './components/Items/ItemForm.vue'
 
 export const routes = [
   {

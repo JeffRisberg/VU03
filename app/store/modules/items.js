@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {router} from "../../main.js"
 
 const state = {
   items: [],
@@ -16,6 +17,9 @@ const mutations = {
   },
   FETCH_ITEMS_SUCCESS(state) {
     // clear the wait flag
+  },
+  PERSIST_ITEM_SUCCESS(state) {
+    // clear the wait flag
   }
 };
 
@@ -25,24 +29,24 @@ const getters = {
 }
 
 const actions = {
-  fetchEvents({commit}) {
+  fetchItems({commit}) {
     fetch('/api/items', {})
       .then(response => response.json())
       .then((json) => {
         commit('FETCH_ITEMS', json.data);
       })
   },
-  fetchEvent({commit}, id) {
+  fetchItem({commit}, id) {
     fetch('/api/items/' + id, {})
       .then(response => response.json())
       .then((json) => {
         commit('SET_ITEM', json.data);
       })
   },
-  newEvent({commit}, id) {
+  newItem({commit}, id) {
     commit('SET_ITEM', {name: "", description: "", value: 0, dateUpdated: null, completed: false});
   },
-  saveEvent({commit}, item) {
+  saveItem({commit}, item) {
     fetch('/api/items/' + item.id, {
       method: 'PUT',
       headers: {
@@ -54,9 +58,10 @@ const actions = {
       .then(response => response.json())
       .then((json) => {
         commit('PERSIST_ITEM_SUCCESS', json.data)
+        router.push({path: '/items'}) // jump to items route
       })
   },
-  addEvent({commit}, item) {
+  addItem({commit}, item) {
     fetch('/api/items', {
       method: 'POST',
       headers: {
@@ -68,9 +73,10 @@ const actions = {
       .then(response => response.json())
       .then((json) => {
         commit('PERSIST_ITEM_SUCCESS', json.data)
+        router.push({path: '/items'}) // jump to items route
       })
   },
-  deleteEvent({commit}, item) {
+  deleteItem({commit}, item) {
     fetch('/api/items/' + item.id, {
       method: 'DELETE',
       headers: {

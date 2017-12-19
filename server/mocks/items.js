@@ -14,7 +14,7 @@ module.exports = (app) => {
   const itemsDB = app.itemsDB;
 
   itemsRouter.get('/', function (req, res) {
-    delete req.query["_"];
+    delete req.query[ "_" ];
     itemsDB.find(req.query).exec(function (error, items) {
       setTimeout(
         () => res.send({
@@ -30,32 +30,34 @@ module.exports = (app) => {
     itemsDB.find({}).sort({ id: -1 }).limit(1).exec(function (err, items) {
 
       if (items.length != 0)
-        req.body.item.id = items[0].id + 1;
+        req.body.item.id = items[ 0 ].id + 1;
       else
         req.body.item.id = 1;
 
       // Insert the new record
       itemsDB.insert(req.body.item, function (err, newItem) {
         res.status(201);
-        res.send({ 'status': 'ok', 'data': [newItem] });
+        res.send({ 'status': 'ok', 'data': [ newItem ] });
       })
     });
   });
 
   itemsRouter.get('/:id', function (req, res) {
     itemsDB.find({ id: req.params.id }).exec(function (error, items) {
-      if (items.length > 0)
-        res.send({
-          'status': 'ok',
-          'data': items[0]
-        });
-      else {
-        res.status(404);
-        res.send({
-          'status': 'missing',
-          'data': null
-        });
-      }
+      setTimeout(() => {
+        if (items.length > 0)
+          res.send({
+            'status': 'ok',
+            'data': items[ 0 ]
+          });
+        else {
+          res.status(404);
+          res.send({
+            'status': 'missing',
+            'data': null
+          })
+        }
+      }, 1000);
     });
   });
 
@@ -63,7 +65,7 @@ module.exports = (app) => {
     const item = req.body.item;
 
     itemsDB.update({ id: req.params.id }, item, {}, function () {
-      res.send({ 'status': 'ok', 'data': [item] });
+      res.send({ 'status': 'ok', 'data': [ item ] });
     });
   });
 

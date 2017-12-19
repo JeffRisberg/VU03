@@ -1,6 +1,6 @@
 <template>
-  <div id="item-form">
-    <form id="item">
+  <div id="item-form" v-if="item">
+    <form id="item" v-on:submit.prevent>
       <label>Name</label>
       <input name="name" v-model='item.name'/>
       <br/>
@@ -13,13 +13,15 @@
       <input type="submit" @click="submitItem(item)"/>
     </form>
   </div>
+  <div id="item-wait" v-else="item">
+    Waiting...
+  </div>
 </template>
 
 <script>
   export default {
     methods: {
       submitItem(item) {
-        console.log(item);
         this.$store.dispatch('saveItem', item)
       }
     },

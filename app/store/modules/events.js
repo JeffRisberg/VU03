@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {router} from "../../main.js"
 
 const state = {
   events: [],
@@ -11,6 +12,7 @@ const mutations = {
     // set the wait flag
   },
   SET_EVENT(state, event) {
+    console.log(event);
     state.event = event;
     // clear the wait flag
   },
@@ -40,7 +42,7 @@ const actions = {
       })
   },
   newEvent({commit}, id) {
-    commit('SET_EVENT', {text: "", text: 0, dateUpdated: null, completed: false});
+    commit('SET_EVENT', {text: "", time: 0, dateUpdated: null, completed: false});
   },
   saveEvent({commit}, event) {
     fetch('/api/events/' + event.id, {
@@ -54,6 +56,7 @@ const actions = {
       .then(response => response.json())
       .then((json) => {
         commit('PERSIST_EVENT_SUCCESS', json.data)
+        router.push({path: '/events'}) // jump to events route
       })
   },
   addEvent({commit}, event) {
@@ -68,6 +71,7 @@ const actions = {
       .then(response => response.json())
       .then((json) => {
         commit('PERSIST_EVENT_SUCCESS', json.data)
+        router.push({path: '/events'}) // jump to events route
       })
   },
   deleteEvent({commit}, event) {

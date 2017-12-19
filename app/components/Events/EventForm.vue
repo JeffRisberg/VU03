@@ -1,22 +1,24 @@
 <template>
-  <div id="event-form">
-    <form id="event">
+  <div id="event-form" v-if="event">
+    <form id="event" v-on:submit.prevent>
       <label>Text</label>
-      <input id="text" name="text" v-model='text'/>
+      <input id="text" name="text" v-model='event.text'/>
       <br/>
       <label>Time</label>
-      <input id="time" name="time" v-model='time'/>
+      <input id="time" name="time" v-model='event.time'/>
       <br/>
-      <input type="submit" @click="submitEvent(text, time)"/>
+      <input type="submit" @click="submitEvent(event)"/>
     </form>
+  </div>
+  <div id="event-wait" v-else="event">
+    Waiting...
   </div>
 </template>
 
 <script>
   export default {
     methods: {
-      submitEvent(text, time) {
-        console.log(event);
+      submitEvent(event) {
         this.$store.dispatch('saveEvent', event)
       }
     },
@@ -31,12 +33,6 @@
     computed: {
       event() {
         return this.$store.getters.event
-      },
-      text() {
-        return this.$store.getters.event.text
-      },
-      time() {
-        return this.$store.getters.event.time
       }
     }
   }

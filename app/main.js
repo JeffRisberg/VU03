@@ -8,7 +8,7 @@ import App from './App.vue'
 
 Vue.use(VueRouter)
 
-const router = new VueRouter({
+export const router = new VueRouter({
   routes,
   mode: 'history',
   scrollBehavior(to, from, savedPosition) {
