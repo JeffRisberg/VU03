@@ -1,15 +1,16 @@
 <template>
-  <div style="width: 200px; background: #ddd; border: 1px solid black;">
+  <b-card>
     <div class="h1 text-muted text-right mb-4">
-      <i class="icon-bell"></i>
+      <i :class="iconClass"></i>
     </div>
     <div class="h4 mb-0">{{value}}</div>
     <small class="text-muted text-uppercase font-weight-bold">{{title}}</small>
-  </div>
+  </b-card>
 </template>
 
 <script>
   export default {
-    props: ['value', 'title']
+    name: 'Indicator',
+    props: ['title', 'iconClass', 'value']
   }
 </script>
