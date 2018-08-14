@@ -1,8 +1,11 @@
+var path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
+
 module.exports = {
   mode: 'development',
   entry: './app/main.js',
   output: {
-    path: __dirname + "/dist",
+    path: path.resolve(__dirname, './dist'),
     filename: "bundle.js"
   },
   module: {
@@ -15,6 +18,13 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader'
+        ]
       }
     ]
   },
@@ -22,5 +32,9 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.esm.js'
     }
-  }
+  },
+  plugins: [
+    // make sure to include the plugin for the magic
+    new VueLoaderPlugin()
+  ]
 }
